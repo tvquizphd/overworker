@@ -18,7 +18,7 @@ heroku git:remote -a overworker
 
 Then deploy
 ```
-git push heroku master
+git push heroku main
 ```
 
 
