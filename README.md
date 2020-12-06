@@ -1,12 +1,19 @@
-## Install and Run 
+## Install and run dev server
 
+Download and install the project.
 ```
 git clone git@github.com:tvquizphd/overworker.git
-cd server
 yarn install
-cd ..
-yarn install
-yarn start
+```
+
+Run the development server.
+```
+yarn run dev
+```
+
+Run the local heroku test.
+```
+heroku local web
 ```
 
 ## Deploy
@@ -20,7 +27,6 @@ Then deploy
 ```
 git push heroku main
 ```
-
 
 ## Tests
 
