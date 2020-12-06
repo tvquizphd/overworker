@@ -20,13 +20,13 @@ export default class App extends React.Component {
           {users.map((user) => (
             <li className="user">
               <p>
-                <strong>Name:</strong> {user.name}
+                <strong>Name:</strong> {user.firstName}
               </p>
               <p>
                 <strong>Email:</strong> {user.email}
               </p>
               <p>
-                <strong>City:</strong> {user.address.city}
+                <strong>City:</strong> {user.cityName}
               </p>
             </li>
           ))}
