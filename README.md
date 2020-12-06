@@ -13,6 +13,7 @@ yarn run dev
 
 Run the local heroku test.
 ```
+yarn run build
 heroku local web
 ```
 
