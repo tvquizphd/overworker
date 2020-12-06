@@ -17,5 +17,5 @@ app.use((req, res, next) => {
 
 // start express server
 app.listen(port, () => {
-  console.log("server started");
+  console.log(`server started on port ${port}`);
 });
