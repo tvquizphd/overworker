@@ -9,6 +9,19 @@ yarn install
 yarn start
 ```
 
+## Deploy
+
+First add the heroku remote
+```
+heroku git:remote -a overworker
+```
+
+Then deploy
+```
+git push heroku master
+```
+
+
 ## Tests
 
 ```
