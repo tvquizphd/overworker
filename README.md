@@ -19,7 +19,7 @@ heroku local web
 
 ## Deploy
 
-First add the heroku remote
+First add the heroku remote and login
 ```
 heroku git:remote -a overworker
 ```
