@@ -8,12 +8,12 @@ yarn install
 
 Run the development server.
 ```
-yarn run dev
+yarn dev
 ```
 
 Run the local heroku test.
 ```
-yarn run build
+yarn build
 heroku local web
 ```
 

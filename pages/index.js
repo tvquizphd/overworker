@@ -8,8 +8,8 @@ const fetcher = (query) =>
     },
     body: JSON.stringify({ query }),
   })
-    .then((res) => res.json())
-    .then((json) => json.data)
+  .then((res) => res.json())
+  .then((json) => json.data)
 
 export default function Index() {
   const { data, error } = useSWR('{ users { name } }', fetcher)
