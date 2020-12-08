@@ -1,3 +1,7 @@
+.inline {
+  display: inline;
+}
+
 .box {
   height: 100%;
   display: flex;
@@ -6,6 +10,12 @@
 
 .header.row {
   flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.virtuoso.row {
+  flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
 }

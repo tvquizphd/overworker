@@ -1,6 +1,5 @@
 import useSWR from 'swr'
-import Post from '../containers/post'
-import styles from './index.module.css'
+import Dash from '../containers/dash'
 
 const fetcher_graphql = (query) =>
   fetch('/api/graphql', {
@@ -22,18 +21,11 @@ export default function Index() {
   const { users } = data
 
   return (
-    <div className={`${styles.box}`}>
-      <div className={`${styles.header} ${styles.row}`}>
-        {users.map((user, i) => (
-          <div key={i}>{user.name}</div>
-        ))}
-      </div>
-      <Post
-        depth={0}
-        sub="hubposts"
-        post="b0101a"
-        subList={['Hubposts','AskReddit']}
-      />
-    </div>
+		<Dash
+			users={users}
+			post="b0101a"
+			sub="hubposts"
+			subList={['Hubposts','AskReddit']}
+		/>
   )
 }
