@@ -1,6 +1,6 @@
 import useSWR from 'swr'
-
-const fetcher = (query) =>
+import Post from '../containers/post'
+const fetcher_graphql = (query) =>
   fetch('/api/graphql', {
     method: 'POST',
     headers: {
@@ -12,7 +12,7 @@ const fetcher = (query) =>
   .then((json) => json.data)
 
 export default function Index() {
-  const { data, error } = useSWR('{ users { name } }', fetcher)
+  const { data, error } = useSWR('{ users { name } }', fetcher_graphql)
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
@@ -21,9 +21,17 @@ export default function Index() {
 
   return (
     <div>
-      {users.map((user, i) => (
-        <div key={i}>{user.name}</div>
-      ))}
+      <div>
+        {users.map((user, i) => (
+          <div key={i}>{user.name}</div>
+        ))}
+      </div>
+      <Post
+        depth={0}
+        sub="hubposts"
+        post="b0101a"
+        subList={['HubPosts','AskReddit']}
+      />
     </div>
   )
 }
