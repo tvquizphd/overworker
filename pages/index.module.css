@@ -1,0 +1,11 @@
+.box {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.header.row {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}

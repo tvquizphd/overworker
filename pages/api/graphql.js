@@ -13,7 +13,7 @@ const resolvers = {
   Query: {
     users(parent, args, context) {
       return [
-        { name: 'Nextjs' }
+        { name: 'Welcome to the Hubposts Megathread viewer!' }
       ]
     },
   },

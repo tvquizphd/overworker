@@ -1,25 +1,30 @@
 import useSWR from 'swr'
+import { Virtuoso } from 'react-virtuoso'
 import Post from '../containers/post'
 import Checkbox from '../components/checkbox'
 import ClassedList from '../components/classed_list'
 import { unescape_html, parse_html } from '../functions/handle_html'
 import { post_matcher, get_post_url } from '../functions/make_urls'
+import styles from './hub_post.module.css'
 
 const fetcher_simple = (url) => fetch(url).then((res) => res.json())
 
-const render_post = (props, sub_i) => {
+const post_renderer = (props, posts_i, sub_regex) => {
   const { depth, maxDepth } = props
   const { subList, openPosts, togglePost } = props
-  const match_sub_post = post_matcher(sub_i)
+  const match_sub_post = post_matcher(sub_regex)
 
-  return (a, id) => {
+  return index => {
+    const a = posts_i[index]
     const a_title = a.innerText
     const a_in_depth = depth + 1 < maxDepth
-    const a_post = match_sub_post.exec(a).groups.post
+    const a_match = match_sub_post.exec(a)
+    const a_post = a_match.groups.post
+    const a_sub = a_match.groups.sub
     const a_checked = openPosts.has(a_post)
     const a_sub_post = a_checked && a_in_depth ? (
       <Post
-        sub={sub_i}
+        sub={a_sub}
         depth={depth + 1}
         subList={subList}
         post={a_post}
@@ -33,9 +38,9 @@ const render_post = (props, sub_i) => {
       />
     ) : ""
     return (
-      <div key={id}> 
+      <div key={index}> 
           {a_checkbox}
-        <a href={get_post_url(sub_i, a_post)}>{a_title}</a>
+        <a href={get_post_url(a_sub, a_post)}>{a_title}</a>
         <div>
           {a_sub_post}
         </div>
@@ -112,8 +117,8 @@ export default function HubPost(props) {
   const { data, error } = useSWR(url, fetcher_simple, {
     onSuccess: (data) => {
       if (depth + 1 < maxDepth) {
-        const post_links = get_post_links(data)
-        post_links.forEach(a => {
+        const post_links = 
+        get_post_links(data).forEach(a => {
           const a_post = post_matcher('.*').exec(a).groups.post
           if (!openPosts.has(a_post)) togglePost(a_post)
         })
@@ -123,25 +128,39 @@ export default function HubPost(props) {
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
-
   const post_links = get_post_links(data)
-  const new_sub_list = get_sub_list(post_links, subList)
 
-  const sections = new_sub_list.map((sub_i, id) => {
-    const posts_i = post_links.filter(a => !!post_matcher(sub_i).exec(a))
-    if (posts_i.length == 0) return <div key={id}></div>
+  // level 0 returns a Virtuoso list with all posts
+  if (depth == 0) {
     return (
-      <div key={id}>
+      <div className={`${styles.virtuoso} ${styles.row}`}>
+        <Virtuoso
+          totalCount={post_links.length}
+          itemContent={post_renderer(props, post_links, '.*')}
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+    )
+  }
+
+  // level 1+ returns labeled sections for all subreddits
+  const new_sub_list = get_sub_list(post_links, subList)
+  const sections = new_sub_list.map((sub_i, index) => {
+    const posts_i = post_links.filter(a => !!post_matcher(sub_i).exec(a))
+    const post_renderer_i = post_renderer(props, posts_i, sub_i)
+    if (posts_i.length == 0) return ""
+    return (
+      <div key={index}>
         <span>{sub_i}</span>
-        <ClassedList className="posts-list">
-          {posts_i.map(render_post(props, sub_i))}
+        <ClassedList className={styles.sublist}>
+          {posts_i.map((a,i) => post_renderer_i(i))}
         </ClassedList>
       </div>
     )
   })
 
   return (
-    <div>
+    <div className="container">
       {sections}
     </div>
   )
