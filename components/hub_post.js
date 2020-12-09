@@ -45,7 +45,7 @@ export default function HubPost(props) {
   const { sub, subList, post } = props
   const { allPosts, openPosts, togglePost } = props
 
-  const url = get_post_url(sub, post)
+  const url = get_post_url(sub, post, true)
   const { data, error } = useSWR(url, fetcher_simple, {
     onSuccess: (data) => {
 			const post_links = 

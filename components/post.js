@@ -58,7 +58,7 @@ const get_sub_list = (post_links, subList=[]) => {
 export default function Post(props) {
   const { sub, subList, post } = props
 
-  const url = get_post_url(sub, post)
+  const url = get_post_url(sub, post, true)
   const { data, error } = useSWR(url, fetcher_simple)
 
   if (error) return <div>Failed to load</div>
