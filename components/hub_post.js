@@ -2,6 +2,8 @@ import useSWR from 'swr'
 import Post from './post'
 import Checkbox from './checkbox'
 import { Virtuoso } from 'react-virtuoso'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShare } from '@fortawesome/free-solid-svg-icons'
 import { post_matcher, get_post_url } from '../functions/make_urls'
 import { get_post_links } from '../functions/posts'
 
@@ -32,7 +34,10 @@ const post_renderer = (props, posts_i, sub_regex) => {
 					toggle={togglePost}
 					checked={a_checked}
 				/>
-        <a href={get_post_url(a_sub, a_post)}>{a_title}</a>
+				<button onClick={e => togglePost(a_post)}>{a_title}</button>
+				<a href={get_post_url(a_sub, a_post)}>
+					<FontAwesomeIcon icon={faShare} />
+				</a>
         <div>
           {a_sub_post}
         </div>
@@ -43,7 +48,7 @@ const post_renderer = (props, posts_i, sub_regex) => {
 
 export default function HubPost(props) {
   const { sub, subList, post } = props
-  const { allPosts, openPosts, togglePost } = props
+  const { allPosts, openPosts, togglePost, toggleAllOrNone } = props
 
   const url = get_post_url(sub, post, true)
   const { data, error } = useSWR(url, fetcher_simple, {
@@ -53,6 +58,7 @@ export default function HubPost(props) {
 				const a_post = post_matcher('.*').exec(a).groups.post
 				if (!openPosts.has(post)) togglePost(a_post)	
 			})
+			toggleAllOrNone('none')
     }
   })
 

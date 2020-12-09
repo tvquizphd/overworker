@@ -2,6 +2,10 @@
   display: inline;
 }
 
+.indent {
+  margin-left: 3em;
+}
+
 .box {
   height: 100%;
   display: flex;

@@ -70,9 +70,9 @@ export default class Dash extends Component {
         </div>
         <div className={`${styles.header} ${styles.row}`}>
           {["all", "none"].map((s, i) => (
-            <div key={i} className={styles.inline}>
+            <div key={i} className={`${styles.inline} ${styles.margin_left}`}>
               <span>
-                Show {s}:
+                Expand {s}:
               </span>
               <Checkbox
                 name={s}
@@ -90,6 +90,7 @@ export default class Dash extends Component {
             openPosts={this.state.openPosts}
             allPosts={this.state.allPosts}
             togglePost={this.togglePost}
+            toggleAllOrNone={this.toggleAllOrNone}
           />
         </div>
       </div>

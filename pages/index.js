@@ -25,7 +25,7 @@ export default function Index() {
 			users={users}
 			post="b0101a"
 			sub="hubposts"
-			subList={['Hubposts','AskReddit']}
+			subList={['AskReddit']}
 		/>
   )
 }
