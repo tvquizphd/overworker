@@ -29,15 +29,15 @@ const post_renderer = (props, posts_i, sub_regex) => {
     ) : ""
     return (
       <div key={index}> 
-				<Checkbox
-					name={a_post}
-					toggle={togglePost}
-					checked={a_checked}
-				/>
-				<button onClick={e => togglePost(a_post)}>{a_title}</button>
-				<a href={get_post_url(a_sub, a_post)}>
-					<FontAwesomeIcon icon={faShare} />
-				</a>
+        <Checkbox
+          name={a_post}
+          toggle={togglePost}
+          checked={a_checked}
+        />
+        <button onClick={e => togglePost(a_post)}>{a_title}</button>
+        <a href={get_post_url(a_sub, a_post)}>
+          <FontAwesomeIcon icon={faShare} />
+        </a>
         <div>
           {a_sub_post}
         </div>
@@ -53,25 +53,25 @@ export default function HubPost(props) {
   const url = get_post_url(sub, post, true)
   const { data, error } = useSWR(url, fetcher_simple, {
     onSuccess: (data) => {
-			const post_links = 
-			get_post_links(data).forEach(a => {
-				const a_post = post_matcher('.*').exec(a).groups.post
-				if (!openPosts.has(post)) togglePost(a_post)	
-			})
-			toggleAllOrNone('none')
+      const post_links = 
+      get_post_links(data).forEach(a => {
+        const a_post = post_matcher('.*').exec(a).groups.post
+        if (!openPosts.has(post)) togglePost(a_post)  
+      })
+      toggleAllOrNone('none')
     }
   })
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
   const post_links = get_post_links(data)
-
+  
   // level 0 returns a Virtuoso list with all posts
-	return (
-		<Virtuoso
-			totalCount={post_links.length}
-			itemContent={post_renderer(props, post_links, '.*')}
-			style={{ width: '100%', height: '100%' }}
-		/>
-	)
+  return (
+    <Virtuoso
+      totalCount={post_links.length}
+      item={post_renderer(props, post_links, '.*')}
+      style={{ width: "100%", height: undefined }}
+    />
+  )
 }

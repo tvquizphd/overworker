@@ -70,7 +70,7 @@ export default class Dash extends Component {
         </div>
         <div className={`${styles.header} ${styles.row}`}>
           {["all", "none"].map((s, i) => (
-            <div key={i} className={`${styles.inline} ${styles.margin_left}`}>
+            <div key={i} className={`${styles.inline} ${styles.indent}`}>
               <span>
                 Expand {s}:
               </span>
