@@ -74,6 +74,7 @@ export async function setupSentimentModel(){
 export function getSentimentScore(text) {
   const spaceChars = /[^a-z0-9'‘’´åáàäãâæéèëêíîïöóôøúüû£çñ]+/g 
   const inputText = text.toLowerCase().replace(spaceChars, ' ').trim().split(' ');
+  // console.log(inputText.join(' '))
   // Convert the words to a sequence of word indices.
   const sequence = inputText.map(word => {
     let wordIndex = metadata.word_index[word] + metadata.index_from;
@@ -81,6 +82,7 @@ export function getSentimentScore(text) {
       wordIndex = OOV_INDEX;
     }
     if (isNaN(wordIndex)) {
+      // console.log(word)
       wordIndex = OOV_INDEX;
     }
     return wordIndex;
