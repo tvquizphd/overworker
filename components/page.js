@@ -17,7 +17,7 @@ export default function Page(props) {
 
   const {inputText, inputTextChange} = props
 
-	const text = inputText.replace(/[\s\n"]+/g,' ')
+	const text = inputText.replace(/[\s\n"\\]+/g,' ')
 	const query = `{ feeling(text: "${text}") { score } }`
   const { data, error } = useSWR(query, fetcher_graphql, {
 		revalidateOnFocus: false
