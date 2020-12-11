@@ -62,7 +62,9 @@ export default class Dash extends Component {
   render() {
     const {sub, post, score, subList} = this.props
     const {inputText, inputTextChange} = this.props
-		const round_score = Number.parseFloat(100*score).toPrecision(3)
+    const dashes = '––.–'
+    const float_rounder = float => +(+(100*float).toPrecision(3)).toFixed(2)
+    const round_score = score < 0? dashes : float_rounder(Number.parseFloat(score))
     return (
       <div className={`${styles.dash}`}>
 				<Head>

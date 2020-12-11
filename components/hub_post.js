@@ -72,9 +72,8 @@ export default function HubPost(props) {
     }
   })
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
-  const post_links = get_post_links(data)
+  const waiting = []
+  const post_links = (error || !data)? waiting : get_post_links(data)
   
   // level 0 returns a Virtuoso list with all posts
   return (

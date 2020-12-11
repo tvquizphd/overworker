@@ -20,10 +20,8 @@ export default function Page(props) {
 	const query = `{ feeling(text: "${inputText}") { score } }`
   const { data, error } = useSWR(query, fetcher_graphql)
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
-
-  const { feeling } = data
+  const waiting = {score: -1}
+  const feeling = (error || !data)? waiting: data.feeling
 
   return (
 		<Dash
