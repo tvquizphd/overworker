@@ -87,6 +87,12 @@ export function getSentimentScore(text) {
     }
     return wordIndex;
   });
+
+  // Return negative if there are no recognizable words
+  if (!sequence.filter(i=> i!=OOV_INDEX).length) {
+    return -1;
+  }
+
   // Perform truncation and padding.
   const paddedSequence = padSequences([sequence], metadata.max_len);
   const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);

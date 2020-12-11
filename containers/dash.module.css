@@ -23,7 +23,7 @@
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
-  flex-grow: 10;
+  flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
 	background-color: rgb(49, 30, 83);
