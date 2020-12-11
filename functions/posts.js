@@ -5,7 +5,9 @@ export const get_post_links = data => {
   const match_post = post_matcher('.*')
 
   // Extract post elements from html selftext
-  const post_html = data[0].data.children[0].data.selftext_html
+	const data_0 = data[0]
+  if (!data_0) return []
+  const post_html = data_0.data.children[0].data.selftext_html
   if (!post_html) return []
 
   const post_el = parse_html(unescape_html(post_html))

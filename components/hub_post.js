@@ -1,11 +1,11 @@
 import useSWR from 'swr'
 import Post from './post'
-import Checkbox from './checkbox'
 import { Virtuoso } from 'react-virtuoso'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShare } from '@fortawesome/free-solid-svg-icons'
 import { post_matcher, get_post_url } from '../functions/make_urls'
 import { get_post_links } from '../functions/posts'
+import styles from './hub_post.module.css'
 
 const fetcher_simple = (url) => fetch(url).then((res) => res.json())
 
@@ -15,7 +15,7 @@ const post_renderer = (props, posts_i, sub_regex) => {
 
   return index => {
     const a = posts_i[index]
-    const a_title = a.innerText
+    const a_title = a.innerText.replace(/[\/_]/g, '/\u200B')
     const a_match = match_sub_post.exec(a)
     const a_post = a_match.groups.post
     const a_sub = a_match.groups.sub
@@ -27,21 +27,30 @@ const post_renderer = (props, posts_i, sub_regex) => {
         post={a_post}
       /> 
     ) : ""
+    const a_parity = index % 2 ? styles.odd : styles.even
+    const a_on = a_checked? styles.on : ''
     return (
-      <div key={index}> 
-        <Checkbox
-          name={a_post}
-          toggle={togglePost}
-          checked={a_checked}
-        />
-        <button onClick={e => togglePost(a_post)}>{a_title}</button>
-        <a href={get_post_url(a_sub, a_post)}>
-          <FontAwesomeIcon icon={faShare} />
-        </a>
+      <div key={index} className={`${styles.item} ${a_parity} ${a_on}`}>
+        <div key={index} className={`${styles.title}`}> 
+          <div className={`${styles.tiny} ${styles.col}`}>
+            <a href={get_post_url(a_sub, a_post)}>
+              <FontAwesomeIcon icon={faShare}
+                style={{transform: 'scale(-1, 1)'}} 
+              />
+            </a>
+          </div>
+          <div className={`${styles.main} ${styles.col}`}>
+            <button className={`${styles.togglePost}`}
+              onClick={e => togglePost(a_post)}
+            >
+              {a_title}
+            </button>
+          </div>
+        </div>
         <div>
           {a_sub_post}
         </div>
-      </div>
+     </div>
     )
   }
 }
@@ -53,12 +62,13 @@ export default function HubPost(props) {
   const url = get_post_url(sub, post, true)
   const { data, error } = useSWR(url, fetcher_simple, {
     onSuccess: (data) => {
-      const post_links = 
-      get_post_links(data).forEach(a => {
-        const a_post = post_matcher('.*').exec(a).groups.post
-        if (!openPosts.has(post)) togglePost(a_post)  
-      })
-      toggleAllOrNone('none')
+      if (!openPosts.size) {
+        const post_links = get_post_links(data).forEach(a => {
+          const a_post = post_matcher('.*').exec(a).groups.post
+          if (!openPosts.has(post)) togglePost(a_post)  
+        })
+        toggleAllOrNone('none')
+      }
     }
   })
 
@@ -70,7 +80,7 @@ export default function HubPost(props) {
   return (
     <Virtuoso
       totalCount={post_links.length}
-      item={post_renderer(props, post_links, '.*')}
+      itemContent={post_renderer(props, post_links, '.*')}
       style={{ width: "100%", height: undefined }}
     />
   )

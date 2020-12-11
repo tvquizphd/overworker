@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Head from 'next/head'
 import Checkbox from '../components/checkbox'
 import HubPost from '../components/hub_post'
 import { equal_sets } from '../functions/math'
@@ -60,38 +61,50 @@ export default class Dash extends Component {
 
   render() {
     const {sub, post, users, subList} = this.props
-  
     return (
-      <div className={`${styles.box}`}>
-        <div className={`${styles.header} ${styles.row}`}>
-          {users.map((user, i) => (
-            <div key={i}>{user.name}</div>
-          ))}
+      <div className={`${styles.dash}`}>
+				<Head>
+					<title>{`${sub} viewer`}</title>
+					<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+				</Head>  
+        <div className={`${styles.primary} ${styles.box}`}>
+          <div className={`${styles.header} ${styles.row}`}>
+            {users.map((user, i) => (
+              <div key={i} className={`${styles.inline} ${styles.col}`}>
+                {user.name}
+              </div>
+            ))}
+          </div>
+          <div className={`${styles.header} ${styles.row}`}>
+            {["all", "none"].map((s, i) => (
+              <div key={i} className={`${styles.inline} ${styles.col}`}>
+                <span>
+                  Expand {s}:
+                </span>
+                <Checkbox
+                  name={s}
+                  toggle={this.toggleAllOrNone}
+                  checked={this.isAllOrNone(s)}
+                />
+              </div>
+            ))}
+          </div>
+          <div className={`${styles.virtuoso} ${styles.row}`}>
+            <HubPost
+              sub={sub}
+              post={post}
+              subList={subList}
+              openPosts={this.state.openPosts}
+              allPosts={this.state.allPosts}
+              togglePost={this.togglePost}
+              toggleAllOrNone={this.toggleAllOrNone}
+            />
+          </div>
         </div>
-        <div className={`${styles.header} ${styles.row}`}>
-          {["all", "none"].map((s, i) => (
-            <div key={i} className={`${styles.inline} ${styles.indent}`}>
-              <span>
-                Expand {s}:
-              </span>
-              <Checkbox
-                name={s}
-                toggle={this.toggleAllOrNone}
-                checked={this.isAllOrNone(s)}
-              />
-            </div>
-          ))}
-        </div>
-        <div className={`${styles.virtuoso} ${styles.row}`}>
-          <HubPost
-            sub={sub}
-            post={post}
-            subList={subList}
-            openPosts={this.state.openPosts}
-            allPosts={this.state.allPosts}
-            togglePost={this.togglePost}
-            toggleAllOrNone={this.toggleAllOrNone}
-          />
+        <div className={`${styles.secondary} ${styles.box}`}>
+					<div className={`${styles.row}`}>
+						<div> <a href="/">refresh the page!</a> </div>
+					</div>
         </div>
       </div>
     )

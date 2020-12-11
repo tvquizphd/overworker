@@ -1,24 +1,67 @@
-.inline {
-  display: inline;
-}
-
-.indent {
-  margin-left: 3em;
-}
-
-.box {
+.dash {
   height: 100%;
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
+	color: rgb(255, 255, 255);
 }
 
-.header.row {
+.dash a {
+  color: rgb(84, 191, 255);
+}
+
+.dash button {
+	color: rgb(255, 255, 255);
+}
+
+.secondary.box {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+  flex-grow: 10;
+  flex-shrink: 1;
+  flex-basis: auto;
+	background-color: rgb(49, 30, 83);
+}
+
+.secondary.box > .row {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+  flex-grow: 1;
+	flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.secondary.box > .row > div {
+	background-color: MidnightBlue
+}
+
+.primary.box {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  min-height: 50vh;
+	background-color: rgb(26, 0, 26);
+}
+
+.primary.box > .header.row {
+	display: flex;
+	justify-content: space-evenly;
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
 }
 
-.virtuoso.row {
+.header.row > .inline.col {
+	display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.primary.box > .virtuoso.row {
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;

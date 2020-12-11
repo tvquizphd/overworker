@@ -1,0 +1,39 @@
+.item.even > .title {
+	background-color: rgb(62, 27, 91);;
+}
+
+.item.odd > .title {
+  background-color: rgb(78, 40, 99);;
+}
+
+.item.on > .title {
+	background-color: rgb(152, 47, 163);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.tiny.col {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.main.col {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.togglePost {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  background-color: Transparent;
+  cursor: pointer;
+	min-height: 3em;
+  border: 0;
+}
