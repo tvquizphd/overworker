@@ -13,6 +13,12 @@
 	color: rgb(255, 255, 255);
 }
 
+.dash textarea {
+	color: rgb(255, 255, 255);
+  font-family: inherit;
+	background-color: MidnightBlue;
+}
+
 .secondary.box {
 	display: flex;
 	flex-flow: row nowrap;
@@ -32,8 +38,23 @@
   flex-basis: auto;
 }
 
-.secondary.box > .row > div {
-	background-color: MidnightBlue
+.secondary.box > .row > .col {
+  flex-grow: 1;
+	flex-shrink: 1;
+  flex-basis: auto;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+	margin-left: 2vw;
+	margin-right: 2vw;
+}
+
+.secondary.box > .row > .col > textarea {
+	height: 40vh;
+	max-height: 40vh;
+	min-height: 2em;
+	width: 60vw;
+	max-width: 80vw;
+	min-width: 2em;
 }
 
 .primary.box {

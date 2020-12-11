@@ -61,6 +61,7 @@ export default function HubPost(props) {
 
   const url = get_post_url(sub, post, true)
   const { data, error } = useSWR(url, fetcher_simple, {
+    revalidateOnFocus: false,
     onSuccess: (data) => {
       if (!openPosts.size) {
         const post_links = get_post_links(data).forEach(a => {

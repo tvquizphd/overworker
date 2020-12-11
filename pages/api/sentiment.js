@@ -1,8 +1,8 @@
 import * as tf from '@tensorflow/tfjs-node'
 
 const urls = {
-	model: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
-	metadata: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json'
+  model: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
+  metadata: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json'
 } 
 
 const SentimentThreshold = {
@@ -68,19 +68,23 @@ export async function setupSentimentModel(){
   if(typeof metadata === 'undefined'){
     metadata = await loadMetadata(urls.metadata);
   }
-	return;
+  return;
 }
 
 export function getSentimentScore(text) {
-  const inputText = text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
+  const spaceChars = /[^a-z0-9'‘’´åáàäãâæéèëêíîïöóôøúüû£çñ]+/g 
+  const inputText = text.toLowerCase().replace(spaceChars, ' ').trim().split(' ');
   // Convert the words to a sequence of word indices.
   const sequence = inputText.map(word => {
     let wordIndex = metadata.word_index[word] + metadata.index_from;
     if (wordIndex > metadata.vocabulary_size) {
       wordIndex = OOV_INDEX;
     }
+    if (isNaN(wordIndex)) {
+      wordIndex = OOV_INDEX;
+    }
     return wordIndex;
-  }).filter(i=>!isNaN(i));
+  });
   // Perform truncation and padding.
   const paddedSequence = padSequences([sequence], metadata.max_len);
   const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);

@@ -105,11 +105,11 @@ export default class Dash extends Component {
         </div>
         <div className={`${styles.secondary} ${styles.box}`}>
 					<div className={`${styles.row}`}>
-            <input
-              type="text"
-              value={inputText}
-              onChange={e => inputTextChange(e.target.value)}
-            />	
+            <div className={`${styles.col}`}>
+              <textarea value={inputText}
+                onChange={e => inputTextChange(e.target.value)}
+              />	
+            </div>	
 					</div>
         </div>
       </div>
