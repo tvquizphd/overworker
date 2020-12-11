@@ -60,7 +60,9 @@ export default class Dash extends Component {
   }
 
   render() {
-    const {sub, post, users, subList} = this.props
+    const {sub, post, score, subList} = this.props
+    const {inputText, inputTextChange} = this.props
+		const round_score = Number.parseFloat(100*score).toPrecision(3)
     return (
       <div className={`${styles.dash}`}>
 				<Head>
@@ -69,11 +71,9 @@ export default class Dash extends Component {
 				</Head>  
         <div className={`${styles.primary} ${styles.box}`}>
           <div className={`${styles.header} ${styles.row}`}>
-            {users.map((user, i) => (
-              <div key={i} className={`${styles.inline} ${styles.col}`}>
-                {user.name}
-              </div>
-            ))}
+						<div className={`${styles.inline} ${styles.col}`}>
+							Sentiment of {round_score}% happy!
+						</div>
           </div>
           <div className={`${styles.header} ${styles.row}`}>
             {["all", "none"].map((s, i) => (
@@ -103,7 +103,11 @@ export default class Dash extends Component {
         </div>
         <div className={`${styles.secondary} ${styles.box}`}>
 					<div className={`${styles.row}`}>
-						<div> <a href="/">refresh the page!</a> </div>
+            <input
+              type="text"
+              value={inputText}
+              onChange={e => inputTextChange(e.target.value)}
+            />	
 					</div>
         </div>
       </div>

@@ -1,20 +1,25 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
+import { setupSentimentModel, getSentimentScore } from './sentiment'
 
 const typeDefs = gql`
   type Query {
-    users: [User!]!
+    feeling(text: String!): Feeling!
   }
-  type User {
-    name: String
+  type Feeling {
+    score: Float!
   }
 `
 
+const model_loaded = setupSentimentModel()
+
 const resolvers = {
   Query: {
-    users(parent, args, context) {
-      return [
-        { name: 'Welcome to the Hubposts Megathread viewer!' }
-      ]
+    feeling(parent, args, context) {
+      return model_loaded.then(() => {
+				return {
+					score: getSentimentScore(args.text)
+				}
+			})
     },
   },
 }
