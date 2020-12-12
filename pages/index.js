@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Page from '../components/page'
+import { alertSafariPortrait, preventScroll } from '../functions/events'
 
 export default class Index extends Component {
 
@@ -8,6 +9,18 @@ export default class Index extends Component {
     this.state = {
       inputText: "Welcome!"
     }
+  }
+
+  componentDidMount() {
+    // Needed For iOS Safari
+    window.addEventListener('orientationchange', alertSafariPortrait, false);
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+  }
+
+  componentWillUnmount() {
+    // Needed For iOS Safari
+    window.removeEventListener('orientationchange', alertSafariPortrait, false);
+    window.removeEventListener('touchmove', preventScroll, { passive: false });
   }
 
   inputTextChange = (s) => {

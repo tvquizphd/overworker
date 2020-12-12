@@ -2,7 +2,7 @@
   height: 100%;
   display: flex;
   flex-flow: row wrap;
-	color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 
 .dash a {
@@ -10,51 +10,50 @@
 }
 
 .dash button {
-	color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 
 .dash textarea {
-	color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   font-family: inherit;
-	background-color: MidnightBlue;
+  background-color: MidnightBlue;
 }
 
-.secondary.box {
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
+.tertiary.box {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-	background-color: rgb(49, 30, 83);
 }
 
-.secondary.box > .row {
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
+.tertiary.box > .row {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
   flex-grow: 1;
-	flex-shrink: 1;
+  flex-shrink: 1;
   flex-basis: auto;
 }
 
-.secondary.box > .row > .col {
+.tertiary.box > .row > .col {
   flex-grow: 1;
-	flex-shrink: 1;
+  flex-shrink: 1;
   flex-basis: auto;
-	margin-top: 2vh;
-	margin-bottom: 2vh;
-	margin-left: 2vw;
-	margin-right: 2vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
 }
 
-.secondary.box > .row > .col > textarea {
-	height: 40vh;
-	max-height: 40vh;
-	min-height: 2em;
-	width: 60vw;
-	max-width: 80vw;
-	min-width: 2em;
+.tertiary.box > .row > .col > textarea {
+  height: 20vh;
+  max-height: 40vh;
+  min-height: 2em;
+  width: 40vw;
+  max-width: 80vw;
+  min-width: 2em;
 }
 
 .primary.box {
@@ -64,19 +63,19 @@
   flex-shrink: 1;
   flex-basis: auto;
   min-height: 50vh;
-	background-color: rgb(26, 0, 26);
+  background-color: rgb(26, 0, 26);
 }
 
 .primary.box > .header.row {
-	display: flex;
-	justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
 }
 
-.header.row > .inline.col {
-	display: flex;
+.primary.box > .header.row > .inline.col {
+  display: flex;
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -87,4 +86,10 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
+}
+
+.primary.box > .virtuoso.row * {
+  --block-scroll: no;/* iOS 12 */
+  touch-action: manipulation;/* iOS 12 */
+  touch-action: pan-y;
 }

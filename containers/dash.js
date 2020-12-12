@@ -67,17 +67,17 @@ export default class Dash extends Component {
     const round_score = score < 0? dashes : float_rounder(Number.parseFloat(score))
     return (
       <div className={`${styles.dash}`}>
-				<Head>
-					<title>{`${sub} viewer`}</title>
+        <Head>
+          <title>{`${sub} viewer`}</title>
           <meta name="viewport"
             content="initial-scale=1.0, maximum-scale=1, width=device-width"
           />
-				</Head>  
+        </Head>  
         <div className={`${styles.primary} ${styles.box}`}>
           <div className={`${styles.header} ${styles.row}`}>
-						<div className={`${styles.inline} ${styles.col}`}>
-							Sentiment of {round_score}% happy!
-						</div>
+            <div className={`${styles.inline} ${styles.col}`}>
+              Sentiment of {round_score}% happy!
+            </div>
           </div>
           <div className={`${styles.header} ${styles.row}`}>
             {["all", "none"].map((s, i) => (
@@ -105,14 +105,14 @@ export default class Dash extends Component {
             />
           </div>
         </div>
-        <div className={`${styles.secondary} ${styles.box}`}>
-					<div className={`${styles.row}`}>
+        <div className={`${styles.tertiary} ${styles.box}`}>
+          <div className={`${styles.row}`}>
             <div className={`${styles.col}`}>
               <textarea value={inputText}
                 onChange={e => inputTextChange(e.target.value)}
-              />	
-            </div>	
-					</div>
+              />  
+            </div>  
+          </div>
         </div>
       </div>
     )

@@ -1,4 +1,11 @@
 html, body, body > div {
+  background-color: rgb(49, 30, 83);
   height: 100%;
   margin: 0;
+}
+
+html * {
+  --block-scroll: yes;/* iOS 12 */
+  touch-action: manipulation;/* iOS 12 */
+  touch-action: none;
 }

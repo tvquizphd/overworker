@@ -17,6 +17,7 @@ export default function Page(props) {
 
   const {inputText, inputTextChange} = props
 
+  // Not corrected: Ill Id Were Well Wed Hell Shell Shed Its Whore Lets Ones
   const replacements = [
     [/[\s\n"\\]+/g, ' '],
     [/´/g, "'"],
@@ -28,35 +29,35 @@ export default function Page(props) {
     [/\b([dD]oes|[dD]o|[dD]id)nt\b/g, "$1n't"],
     [/\b([sS]h|[cC]|[wW])ouldnt\b/g, "$1ouldn't"],
     [/\b([sS]h|[cC]|[wW])ouldve\b/g, "$1ould've"],
-    [/\b([yY]ou|[iI]t|[wW]e|[tT]hey)d\b/g, "$1'd"],
+    [/\b([hH]e|[sS]he|[hH]ere|[wW]here|[wW]hat)s\b/g, "$1's"],
     [/\b([iI]t|[tT]hey|[tT]his|[wW]hat)ll\b/g, "$1'll"],
-    [/\b([hH]ere|[wW]here|[wW]hat)s\b/g, "$1's"],
+    [/\b([yY]ou|[hH]e|[iI]t|[tT]hey)d\b/g, "$1'd"],
     [/\b([wW]here|[wW]hat)'?d\b/g, "$1 did"],
+    [/\b([wW]e|[mM]ight)ve\b/g, "$1've"],
     [/\b([tT]here)'?ve\b/g, "$1 have"],
     [/\b([wW]here)'?ll\b/g, "$1 will"],
-    [/\b([mM]ight)ve\b/g, "$1've"],
-    [/\b([hH]e|[sS]he|[tT]hat|[tT]here|[wW]ho)(s|d|ll)\b/g, "$1'$2"],
+    [/\b([tT]hat|[tT]here|[wW]ho)(s|d|ll)\b/g, "$1'$2"],
     [/\b([yY]ou|[tT]hey)(re|ve|ll)\b/g, "$1'$2"],
-    [/\b([wW]e|[wW]ho)(ve|ll)\b/g, "$1'$2"],
+    [/\b([wW]ho)(ve|ll)\b/g, "$1'$2"],
     [/\b(I)(m|ve)\b/g, "$1'$2"],
   ]
   const text = replacements.reduce((t,re) => t.replace(...re), inputText)
-	const query = `{ feeling(text: "${text}") { score } }`
+  const query = `{ feeling(text: "${text}") { score } }`
   const { data, error } = useSWR(query, fetcher_graphql, {
-		revalidateOnFocus: false
-	})
+    revalidateOnFocus: false
+  })
 
   const waiting = {score: -1}
   const feeling = (error || !data)? waiting: data.feeling
 
   return (
-		<Dash
-			score={feeling.score}
-			post="b0101a"
-			sub="hubposts"
-			subList={['AskReddit']}
+    <Dash
+      score={feeling.score}
+      post="b0101a"
+      sub="hubposts"
+      subList={['AskReddit']}
       inputText={inputText}
       inputTextChange={inputTextChange}
-		/>
+    />
   )
 }
