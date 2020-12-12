@@ -11,7 +11,7 @@ const post_renderer = (posts_i, sub_regex) => {
 
   return index => {
     const a = posts_i[index]
-    const a_title = a.innerText.replace(/[\/_]/g, '/\u200B')
+    const a_title = a.innerText.replace(/([\/_])/g, '$1\u200B')
     const a_match = match_sub_post.exec(a)
     const a_post = a_match.groups.post
     const a_sub = a_match.groups.sub
