@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Page from '../components/page'
-import { alertSafariPortrait, preventScroll } from '../functions/events'
+import { refreshOniOSRotate, preventScroll } from '../functions/events'
 
 export default class Index extends Component {
 
@@ -12,14 +12,15 @@ export default class Index extends Component {
   }
 
   componentDidMount() {
-    // Needed For iOS Safari
-    window.addEventListener('orientationchange', alertSafariPortrait, false);
+    // For overwriting iOS Chrome 100% height offset issue and
+    // For keeping navbar in iOS Safari Portrait mode on smaller iPhones
+    window.addEventListener('orientationchange', refreshOniOSRotate, false);
+    // For preventing navbar in iOS Safari Landscape mode
     window.addEventListener('touchmove', preventScroll, { passive: false });
   }
 
   componentWillUnmount() {
-    // Needed For iOS Safari
-    window.removeEventListener('orientationchange', alertSafariPortrait, false);
+    window.removeEventListener('orientationchange', refreshOniOSRotate, false);
     window.removeEventListener('touchmove', preventScroll, { passive: false });
   }
 
