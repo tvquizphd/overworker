@@ -1,9 +1,10 @@
 .box {
   display: flex;
   flex-flow: column wrap;
-  flex-grow:  1;
+  flex-grow:  10;
   flex-shrink: 1;
   flex-basis: 6em;
+  min-height: 50vh;
 }
 
 .box > div {
