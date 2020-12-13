@@ -1,6 +1,10 @@
 import { unescape_html, parse_html } from '../functions/handle_html'
 import { post_matcher } from '../functions/make_urls'
 
+export const get_post_comments = data => {
+  return []
+}
+
 export const get_post_links = data => {
   const match_post = post_matcher('.*')
 

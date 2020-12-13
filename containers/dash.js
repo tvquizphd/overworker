@@ -2,6 +2,7 @@ import { Component } from 'react'
 import Head from 'next/head'
 import Checkbox from '../components/checkbox'
 import HubPost from '../components/hub_post'
+import RootNode from '../components/root_node'
 import { equal_sets } from '../functions/math'
 import styles from './dash.module.css'
 
@@ -45,7 +46,7 @@ export default class Dash extends Component {
 
     this.setState({
       openPostsCache: new Set(openPosts),
-      openPosts: result 
+      openPosts: result
     })
   }
 
@@ -72,7 +73,7 @@ export default class Dash extends Component {
           <meta name="viewport"
             content="initial-scale=1.0, maximum-scale=1, width=device-width"
           />
-        </Head>  
+        </Head>
         <div className={`${styles.primary} ${styles.box}`}>
           <div className={`${styles.header} ${styles.row}`}>
             <div className={`${styles.inline} ${styles.col}`}>
@@ -105,16 +106,16 @@ export default class Dash extends Component {
             />
           </div>
         </div>
+				<RootNode
+					sub={"AskReddit"}
+					post={"a9qtfe"}
+				/>
         <div className={`${styles.tertiary} ${styles.box}`}>
-          <div className={`${styles.row}`}>
-            <div className={`${styles.col}`}>
-              <textarea value={inputText}
-                onChange={e => inputTextChange(e.target.value)}
-              />  
-            </div>  
-          </div>
+					<textarea value={inputText}
+						onChange={e => inputTextChange(e.target.value)}
+					/>
         </div>
       </div>
     )
-  } 
+  }
 }

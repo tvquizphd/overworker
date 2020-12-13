@@ -22,47 +22,24 @@
 .tertiary.box {
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
+	align-items: stretch;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
 }
 
-.tertiary.box > .row {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+.tertiary.box > textarea {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-}
-
-.tertiary.box > .row > .col {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  margin-left: 2vw;
-  margin-right: 2vw;
-}
-
-.tertiary.box > .row > .col > textarea {
-  height: 20vh;
-  max-height: 40vh;
-  min-height: 2em;
-  width: 40vw;
-  max-width: 80vw;
-  min-width: 2em;
 }
 
 .primary.box {
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  min-height: 50vh;
+  flex-shrink: 0;
+	flex-basis: auto;
   background-color: rgb(26, 0, 26);
 }
 
@@ -85,7 +62,7 @@
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: auto;
+	flex-basis: auto;
 }
 
 .primary.box > .virtuoso.row * {
