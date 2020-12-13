@@ -19,7 +19,7 @@ const TreeMapChart = (props) => { {
           <Chart
             chartType="TreeMap"
             controls={fakeControls}
-            width={`${size.width}px`}
+            width={`${size.width + 10}px`}
             height={`${size.height}px`}
             data={data}
             options={options}

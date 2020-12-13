@@ -120,7 +120,7 @@ export default class TreeMap extends Component {
       minColor: "#7193ff",
       midColor: "#B86C80",
       maxColor: "#ff4500",
-      headerHeight: 30,
+      headerHeight: 40,
       headerColor: "#1a001a",
       fontColor: "white",
       showScale: false,
