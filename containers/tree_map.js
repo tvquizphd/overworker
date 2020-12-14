@@ -101,7 +101,7 @@ export default class TreeMap extends Component {
   };
 
   onKeyPress = (event) => {
-    if (event.key === " ") {
+    if (event.key === " " || event.key === "Enter") {
       const text = document.activeElement.querySelector("text");
 			if (text) this.setCurrentNodeName(text.textContent);
     }

@@ -88,6 +88,9 @@ export default class Dash extends Component {
             content="initial-scale=1.0, maximum-scale=1, width=device-width"
           />
         </Head>
+        <div className={`${styles.leftmost} ${styles.box}`}>
+          {inputText}
+        </div>
         <div className={`${styles.primary} ${styles.box}`}>
           <div className={`${styles.header} ${styles.row}`}>
             <div className={`${styles.inline} ${styles.col}`}>
@@ -124,9 +127,7 @@ export default class Dash extends Component {
 					sub={"AskReddit"}
 					post={"a9qtfe"}
 				/>
-        <div className={`${styles.tertiary} ${styles.box}`}>
-          {inputText}
-        </div>
+        <div className={`${styles.rightmost} ${styles.box}`}> </div>
       </div>
     )
   }

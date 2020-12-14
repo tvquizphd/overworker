@@ -4,11 +4,11 @@
   flex-grow:  10;
   flex-shrink: 1;
   flex-basis: 6em;
-  min-height: 50vh;
+  min-width: 50vw;
 }
 
 .box > div {
   flex-grow:  1;
   flex-shrink: 1;
-  flex-basis: 6em;
+  flex-basis: auto;
 }

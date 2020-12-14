@@ -19,19 +19,14 @@
   background-color: MidnightBlue;
 }
 
-.tertiary.box {
+.leftmost.box,
+.rightmost.box {
   display: flex;
-  flex-flow: row nowrap;
-	align-items: stretch;
+  flex-flow: column nowrap;
+	align-items: center;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: auto;
-}
-
-.tertiary.box > textarea {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
+  flex-basis: 2em;
 }
 
 .primary.box {
