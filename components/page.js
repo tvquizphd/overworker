@@ -1,4 +1,5 @@
 import useSWR from 'swr'
+import { useState } from 'react'
 import Dash from '../containers/dash'
 
 const fetcher_graphql = (query) =>
@@ -15,7 +16,7 @@ const fetcher_graphql = (query) =>
 
 export default function Page(props) {
 
-  const {inputText, inputTextChange} = props
+  const [inputText, inputTextChange] = useState('Welcome')
 
   // Not corrected: Ill Id Were Well Wed Hell Shell Shed Its Whore Lets Ones
   const replacements = [

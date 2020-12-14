@@ -5,6 +5,7 @@ import HubPost from '../components/hub_post'
 import RootNode from '../components/root_node'
 import { equal_sets } from '../functions/math'
 import styles from './dash.module.css'
+import { refreshOniOSRotate, preventScroll } from '../functions/events'
 
 export default class Dash extends Component {
 
@@ -60,6 +61,19 @@ export default class Dash extends Component {
     })
   }
 
+  componentDidMount() {
+    // For overwriting iOS Chrome 100% height offset issue and
+    // For keeping navbar in iOS Safari Portrait mode on smaller iPhones
+    window.addEventListener('orientationchange', refreshOniOSRotate, false);
+    // For preventing navbar in iOS Safari Landscape mode
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('orientationchange', refreshOniOSRotate, false);
+    window.removeEventListener('touchmove', preventScroll, { passive: false });
+  }
+
   render() {
     const {sub, post, score, subList} = this.props
     const {inputText, inputTextChange} = this.props
@@ -111,9 +125,7 @@ export default class Dash extends Component {
 					post={"a9qtfe"}
 				/>
         <div className={`${styles.tertiary} ${styles.box}`}>
-					<textarea value={inputText}
-						onChange={e => inputTextChange(e.target.value)}
-					/>
+          {inputText}
         </div>
       </div>
     )
