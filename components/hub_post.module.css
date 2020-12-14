@@ -15,12 +15,6 @@
   align-items: center;
 }
 
-.tiny.col {
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-}
-
 .main.col {
   display: flex;
   flex-grow: 1;

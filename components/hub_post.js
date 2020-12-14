@@ -32,13 +32,6 @@ const post_renderer = (props, posts_i, sub_regex) => {
     return (
       <div key={index} className={`${styles.item} ${a_parity} ${a_on}`}>
         <div key={index} className={`${styles.title}`}> 
-          <div className={`${styles.tiny} ${styles.col}`}>
-            <a href={get_post_url(a_sub, a_post)}>
-              <FontAwesomeIcon icon={faShare}
-                style={{transform: 'scale(-1, 1)'}} 
-              />
-            </a>
-          </div>
           <div className={`${styles.main} ${styles.col}`}>
             <button className={`${styles.togglePost}`}
               onClick={e => togglePost(a_post)}
