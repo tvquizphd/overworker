@@ -6013,10 +6013,10 @@ react-sizeme@^2.6.12:
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
 
-react-virtuoso@^1.0.0-beta.5:
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-1.0.0-beta.5.tgz#cf8bca66a598428378fff76955b478d79a744635"
-  integrity sha512-C/OgF4kNwXbcwueXbk+nIBED3IpFLkWJhdhr3dvYZQ1NWvizYjge/PMYfDW8qT9UH+4AEdiXRenCYys2k6HsFg==
+react-virtuoso@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-1.0.0.tgz#3bf6c75dd38593aac68dcbae6c717c5d06c25f7a"
+  integrity sha512-CsgQ8XZnDDa9Ce7S7nZftR55V6ozE+R6yst6rBIHCSF28KEY+KgI8XZLgl/nNZkYznw2XEch8QujwXGQXm8kIw==
   dependencies:
     "@virtuoso.dev/react-urx" "^0.2.0"
     "@virtuoso.dev/urx" "^0.2.0"
