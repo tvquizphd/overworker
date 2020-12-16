@@ -1,6 +1,5 @@
 import useSWR from 'swr'
 import ClassedList from './classed_list'
-import { get_post_comments } from '../functions/posts'
 import { get_post_url } from '../functions/make_urls'
 import TreeMap from '../containers/tree_map'
 
@@ -21,12 +20,12 @@ const node_renderer = (comments) => {
 export default function RootNode(props) {
   const { sub, post, size } = props
 
-  const url = get_post_url(sub, post, true)
+  const url = get_post_url(sub, post, ".json")
   const { data, error } = useSWR(url, fetcher_simple)
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Loading...</div>
-  const comments = get_post_comments(data)
+  const comments = [] 
   const render_comment = node_renderer(comments)
   const node_list = (
     <ClassedList className={""}>

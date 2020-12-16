@@ -16,6 +16,19 @@ const fetcher_graphql = (query) =>
 
 export default function Page(props) {
 
+  const {sub, post} = props.root
+  const allPosts = new Map(
+    props.root.allPosts.map(([p, a]) => {
+      return [p, {
+        ...a,
+        allSubposts: new Map(
+          a.allSubposts.map(([p_i, a_i]) => {
+            return [p_i, a_i]
+          })
+        )
+      }]
+    })
+  )
   const [inputText, inputTextChange] = useState('Welcome')
 
   // Not corrected: Ill Id Were Well Wed Hell Shell Shed Its Whore Lets Ones
@@ -54,8 +67,9 @@ export default function Page(props) {
   return (
     <Dash
       score={feeling.score}
-      post="b0101a"
-      sub="hubposts"
+      sub={sub}
+      post={post}
+      allPosts={allPosts}
       subList={['AskReddit']}
       inputText={inputText}
       inputTextChange={inputTextChange}

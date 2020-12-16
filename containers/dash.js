@@ -11,10 +11,11 @@ export default class Dash extends Component {
 
   constructor(props) {
     super()
+    const { allPosts } = props
     this.state = {
-      openPostsCache: new Set([]),
-      openPosts: new Set([]),
-      allPosts: new Set([])
+      allPosts: allPosts,
+      openPostsCache: new Set([...allPosts.keys()]),
+      openPosts: new Set()
     }
   }
 
@@ -27,8 +28,8 @@ export default class Dash extends Component {
       'false,true': 'all',
       'true,true': 'none'
     }[[
-      equal_sets(openPosts, new Set([])),
-      equal_sets(openPosts, allPosts)
+      equal_sets(openPosts, new Set()),
+      equal_sets(openPosts, new Set([...allPosts.keys()]))
     ]]
     return old_status == str
   }
@@ -40,8 +41,8 @@ export default class Dash extends Component {
     const new_status = this.isAllOrNone(str)? 'history' : str
     const result = {
       '': openPosts,
-      'none': new Set([]),
-      'all': new Set(allPosts),
+      'none': new Set(),
+      'all': new Set([...allPosts.keys()]),
       'history': new Set(openPostsCache)
     }[new_status]
 
@@ -51,13 +52,35 @@ export default class Dash extends Component {
     })
   }
 
+  updatePost = (post, params) => {
+    const {allPosts} = this.state
+    
+    const oldParams = allPosts.get(post) || {
+      title: "Untitled Post",
+      sub: "hubposts",
+      post: post,
+      allSubposts: new Map()
+    }
+
+    allPosts.set(post, {
+      ...oldParams,
+      ...params,
+      allSubposts: new Map([
+        ...oldParams.allSubposts,
+        ...params.allSubposts
+      ]),
+    })
+
+    this.setState({
+      allPosts: allPosts
+    })
+  }
+
   togglePost = (post) => {
-    const {openPosts, allPosts} = this.state
-    if (!allPosts.has(post)) allPosts.add(post)
+    const {openPosts} = this.state
     !openPosts.has(post)? openPosts.add(post): openPosts.delete(post)
     this.setState({
-      openPosts: openPosts,
-      allPosts: allPosts
+      openPosts: openPosts
     })
   }
 
@@ -116,10 +139,11 @@ export default class Dash extends Component {
               sub={sub}
               post={post}
               subList={subList}
+              toggleAllOrNone={this.toggleAllOrNone}
               openPosts={this.state.openPosts}
               allPosts={this.state.allPosts}
               togglePost={this.togglePost}
-              toggleAllOrNone={this.toggleAllOrNone}
+              updatePost={this.updatePost}
             />
           </div>
         </div>

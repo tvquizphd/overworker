@@ -12,14 +12,7 @@
 
 .title {
   display: flex;
-  align-items: center;
-}
-
-.main.col {
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
+  flex-flow: row nowrap;
 }
 
 .togglePost {

@@ -1,9 +1,5 @@
-import { unescape_html, parse_html } from '../functions/handle_html'
+import { parse_html } from '../functions/handle_html'
 import { post_matcher } from '../functions/make_urls'
-
-export const get_post_comments = data => {
-  return []
-}
 
 export const get_post_links = data => {
   const match_post = post_matcher('.*')
@@ -12,21 +8,33 @@ export const get_post_links = data => {
   const post_html = data[0]? data[0].data.children[0].data.selftext_html : ''
   if (!post_html) return []
 
-  const post_el = parse_html(unescape_html(post_html))
-  if (!post_el.querySelectorAll) return []
+  const post_el = parse_html(post_html)
+  const node_list = post_el.getElementsByTagName('a')
+  if (!node_list.length) return []
 
   // Return links matching generic post format
-  const all_links = Array.from(post_el.querySelectorAll('a'))
-  const post_links = all_links.filter(a => !!match_post.exec(a))
+  const post_links = Array.from(node_list).map(a=>{
+    return {
+      href: a.getAttribute('href'),
+      title: a.firstChild.data
+    } 
+  }).filter(a => {
+    return !!match_post.exec(a.href)
+  }).map(a => {
+    const match = match_post.exec(a.href)
+    return {
+      title: a.title,
+      sub: match.groups.sub,
+      post: match.groups.post
+    }
+  })
 
   // Make links unique by post, but keep order
-  const post_link_set = new Set([])
-  return post_links.reduce((list, a) => {
-    const a_post = match_post.exec(a).groups.post
-    if (!post_link_set.has(a_post)) {
-      post_link_set.add(a_post)
-      list.push(a)
+  const post_set = new Set([])
+  return [...post_links.reduce((m, a) => {
+    if (!m.has(a.post)) {
+      m.set(a.post, a)
     }
-    return list
-  }, [])
+    return m
+  }, new Map()).values()]
 }
