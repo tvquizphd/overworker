@@ -2,7 +2,7 @@ import { Component } from 'react'
 import Head from 'next/head'
 import Checkbox from '../components/checkbox'
 import HubPost from '../components/hub_post'
-import RootNode from '../components/root_node'
+import TreeMap from '../containers/tree_map'
 import { equal_sets } from '../functions/math'
 import styles from './dash.module.css'
 
@@ -130,10 +130,7 @@ export default class Dash extends Component {
             />
           </div>
         </div>
-				<RootNode
-					sub={"AskReddit"}
-					post={"a9qtfe"}
-				/>
+        <TreeMap/>
       </div>
     )
   }
