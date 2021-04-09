@@ -11,7 +11,7 @@
 }
 
 .primary.box {
-	width: 70vw;
+	width: 100vw;
   background-color: rgb(26, 0, 26);
 }
 
@@ -24,10 +24,4 @@
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
-}
-
-.fixed {
-  position: fixed;
-  right: 0;
-  top: 0;
 }

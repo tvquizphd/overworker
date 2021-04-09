@@ -130,9 +130,6 @@ export default class Dash extends Component {
             />
           </div>
         </div>
-        <div className={`${styles.fixed}`}>
-          <TreeMap/>
-        </div>
       </div>
     )
   }
