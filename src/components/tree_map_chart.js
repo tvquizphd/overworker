@@ -8,6 +8,8 @@ const TreeMapChart = (props) => {
   return (
     <Chart
       chartType="TreeMap"
+      height="100vh"
+      width="30vw"
       data={data}
       options={options}
       chartEvents={[

@@ -100,7 +100,7 @@ export default class Dash extends Component {
         <div className={`${styles.primary} ${styles.box}`}>
           <div className={`${styles.header} ${styles.row}`}>
             <div className={`${styles.inline} ${styles.col}`}>
-              "{inputText}" has a sentiment of {round_score}% happy!
+              "{inputText}" is {round_score}% happy!
             </div>
           </div>
           <div className={`${styles.header} ${styles.row}`}>
@@ -130,7 +130,9 @@ export default class Dash extends Component {
             />
           </div>
         </div>
-        <TreeMap/>
+        <div className={`${styles.fixed}`}>
+          <TreeMap/>
+        </div>
       </div>
     )
   }

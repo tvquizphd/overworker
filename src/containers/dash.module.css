@@ -1,7 +1,4 @@
 .dash {
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
   color: rgb(255, 255, 255);
 }
 
@@ -13,39 +10,24 @@
   color: rgb(255, 255, 255);
 }
 
-.dash textarea {
-  color: rgb(255, 255, 255);
-  font-family: inherit;
-  background-color: MidnightBlue;
-}
-
 .primary.box {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  flex-shrink: 1;
-	flex-basis: auto;
+	width: 70vw;
   background-color: rgb(26, 0, 26);
 }
 
 .primary.box > .header.row {
   display: flex;
   justify-content: space-evenly;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
 }
 
 .primary.box > .header.row > .inline.col {
-  display: flex;
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
 }
 
-.primary.box > .primary.row {
-  display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
-	flex-basis: auto;
+.fixed {
+  position: fixed;
+  right: 0;
+  top: 0;
 }

@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import TreeMapChart from "../components/tree_map_chart";
-import styles from "./tree_map.module.css";
 
 const raw_data = [
   [
@@ -132,17 +131,12 @@ export default class TreeMap extends Component {
     };
 
     return (
-      <div
-        className={`${styles.box}`}
-        onKeyPress={this.onKeyPress}
-      >
-				<TreeMapChart
-					data={data}
-					options={options}
-					onChartReady={this.onChartReady}
-					onChartSelect={this.onChartSelect}
-				/>
-			</div>
+      <TreeMapChart
+        data={data}
+        options={options}
+        onChartReady={this.onChartReady}
+        onChartSelect={this.onChartSelect}
+      />
     );
   }
 }
