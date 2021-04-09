@@ -1,7 +1,4 @@
 import Post, {add_nbsp} from './post'
-//import { Virtuoso } from 'react-virtuoso'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faShare } from '@fortawesome/free-solid-svg-icons'
 import styles from './hub_post.module.css'
 
 const post_renderer = (props, posts_i) => {

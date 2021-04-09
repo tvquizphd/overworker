@@ -19,16 +19,6 @@
   background-color: MidnightBlue;
 }
 
-.leftmost.box,
-.rightmost.box {
-  display: flex;
-  flex-flow: column nowrap;
-	align-items: center;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 2em;
-}
-
 .primary.box {
   display: flex;
   flex-flow: column nowrap;
@@ -53,15 +43,9 @@
   flex-basis: auto;
 }
 
-.primary.box > .virtuoso.row {
+.primary.box > .primary.row {
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;
 	flex-basis: auto;
-}
-
-.primary.box > .virtuoso.row * {
-  --block-scroll: no;/* iOS 12 */
-  touch-action: manipulation;/* iOS 12 */
-  touch-action: pan-y;
 }

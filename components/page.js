@@ -18,12 +18,12 @@ export default function Page(props) {
 
   const {sub, post} = props.root
   const allPosts = new Map(
-    props.root.allPosts.map(([p, a]) => {
-      return [p, {
+    props.root.allPosts.map(a => {
+      return [a.post, {
         ...a,
         allSubposts: new Map(
-          a.allSubposts.map(([p_i, a_i]) => {
-            return [p_i, a_i]
+          a.allSubposts.map(_a => {
+            return [_a.post, _a]
           })
         )
       }]

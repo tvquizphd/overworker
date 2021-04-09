@@ -5,7 +5,6 @@ import HubPost from '../components/hub_post'
 import RootNode from '../components/root_node'
 import { equal_sets } from '../functions/math'
 import styles from './dash.module.css'
-import { refreshOniOSRotate, preventScroll } from '../functions/events'
 
 export default class Dash extends Component {
 
@@ -84,19 +83,6 @@ export default class Dash extends Component {
     })
   }
 
-  componentDidMount() {
-    // For overwriting iOS Chrome 100% height offset issue and
-    // For keeping navbar in iOS Safari Portrait mode on smaller iPhones
-    window.addEventListener('orientationchange', refreshOniOSRotate, false);
-    // For preventing navbar in iOS Safari Landscape mode
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('orientationchange', refreshOniOSRotate, false);
-    window.removeEventListener('touchmove', preventScroll, { passive: false });
-  }
-
   render() {
     const {sub, post, score, subList} = this.props
     const {inputText, inputTextChange} = this.props
@@ -111,13 +97,10 @@ export default class Dash extends Component {
             content="initial-scale=1.0, maximum-scale=1, width=device-width"
           />
         </Head>
-        <div className={`${styles.leftmost} ${styles.box}`}>
-          {inputText}
-        </div>
         <div className={`${styles.primary} ${styles.box}`}>
           <div className={`${styles.header} ${styles.row}`}>
             <div className={`${styles.inline} ${styles.col}`}>
-              Sentiment of {round_score}% happy!
+              "{inputText}" has a sentiment of {round_score}% happy!
             </div>
           </div>
           <div className={`${styles.header} ${styles.row}`}>
@@ -134,7 +117,7 @@ export default class Dash extends Component {
               </div>
             ))}
           </div>
-          <div className={`${styles.virtuoso} ${styles.row}`}>
+          <div className={`${styles.primary} ${styles.row}`}>
             <HubPost
               sub={sub}
               post={post}
@@ -151,7 +134,6 @@ export default class Dash extends Component {
 					sub={"AskReddit"}
 					post={"a9qtfe"}
 				/>
-        <div className={`${styles.rightmost} ${styles.box}`}> </div>
       </div>
     )
   }
