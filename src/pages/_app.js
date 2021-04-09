@@ -1,4 +1,4 @@
-import '../public/main.css'
+import '../../public/main.css'
 
 // This default export is required
 export default function MyApp({ Component, pageProps }) {
