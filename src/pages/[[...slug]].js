@@ -1,4 +1,5 @@
 import Page from '../components/page'
+import TreeMap from '../containers/tree_map'
 import process from 'process'
 import dotenv from 'dotenv'
 import path from 'path'
@@ -30,6 +31,11 @@ export default function Index( props ) {
     </div>
   }
 
+  // Render the tree
+  if (slug[0] == 'tree') {
+    return <TreeMap/>
+  }
+
   return <Page {...props}/>
 }
 
@@ -38,6 +44,10 @@ export const getStaticPaths = () => {
     paths: [
       {
         params: { slug: null },
+        locale: 'en-US',
+      },
+      {
+        params: { slug: ['tree'] },
         locale: 'en-US',
       }
     ],
@@ -63,7 +73,7 @@ export async function getStaticProps(context) {
 
   const { locale, locales, defaultLocale, params } = context
   const request_path = params.slug? params.slug.join('/') : '/'
-  const valid_paths = ['/']
+  const valid_paths = ['/', 'tree']
   let root = {
     error: {
       code: 404
@@ -87,7 +97,7 @@ export async function getStaticProps(context) {
   const sub = "hubposts"
   const title = "Hubposts Megathread"
 
-  const save_dir = path.join(process.cwd(), 'data', locale, request_path, `v${version}`)
+  const save_dir = path.join(process.cwd(), 'data', locale, `v${version}`)
   const save_file = path.join(save_dir, `${post}.json`)
   if (!fs.existsSync(save_dir)) {
     console.log(`Missing ${save_file}`)
