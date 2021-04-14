@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import { get_reddit_api } from '../functions/reddit_api'
 import { post_matcher, get_post_url } from './make_urls'
 import { get_post_links, get_post_info, get_post_sub } from './posts'
 
@@ -19,10 +20,9 @@ async function fetchSubpost(reddit_api, parents, a) {
   const reddit_first_timestamp = '2005-06-23T18:43:53-00:00'
   const reddit_first = new Date(reddit_first_timestamp).getTime() / 1000
 
+  const should_fetch = true
   const is_same_post = new RegExp(`^${a.post}$`,'i')
   const url = get_post_url(a.sub, a.post, ".json", true)
-  // const should_fetch = post_matcher('.*').test(a.title)
-  const should_fetch = true
   const data = (should_fetch)? await reddit_api.axios(url) || [] : []
   const sub = a.sub || get_post_sub(data) || 'askreddit'
   const children = get_post_links(data).filter(_a => {
@@ -147,12 +147,11 @@ async function fetchAllHubposts(reddit_api, parents, children) {
   return Promise.all(children.map(async (a) => {
     const hubpost = await fetchHubpost(reddit_api, parents, a)
     total_fetched += 1
-    //console.log(`Fetched ${total_fetched} of ${children.length} Hubposts`)
     return hubpost
   }))
 }
 
-export async function fetchMegathread(reddit_api, a) {
+async function fetchMegathread(reddit_api, a) {
   const is_same_post = new RegExp(`^${a.post}$`,'i')
   const url = get_post_url(a.sub, a.post, ".json", true)
   const data = await reddit_api.axios(url) || []
@@ -171,4 +170,11 @@ export async function fetchMegathread(reddit_api, a) {
     }, [...allPosts]),
     fail: !allPosts.length
   }
+}
+
+export async function fetchRoot(version, save_dir, megathread) {
+  const reddit_api = await get_reddit_api(version, save_dir)
+  const root = await fetchMegathread(reddit_api, megathread)
+  reddit_api.log(false, 'Done')
+  return { root }
 }
